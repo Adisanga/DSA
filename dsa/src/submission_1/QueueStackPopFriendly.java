@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dsa;
+package submission_1;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -11,12 +11,20 @@ import java.util.Queue;
  *
  * @author DELL
  */
-public class QueueStackPushFriendly {
+public class QueueStackPopFriendly {
     private Queue<Integer> q1 = new LinkedList<>();
     private Queue<Integer> q2 = new LinkedList<>();
     
     public void push(int data) {
-        q1.add(data);
+        q2.add(data);
+
+        while (!q1.isEmpty()) {
+            q2.add(q1.remove());
+        }
+
+        Queue<Integer> temp = q1;
+        q1 = q2;
+        q2 = temp;
     }
     
     public int pop() {
@@ -25,21 +33,11 @@ public class QueueStackPushFriendly {
             return -1;
         }
 
-        while (q1.size() > 1) {
-            q2.add(q1.remove());
-        }
-
-        int popped = q1.remove();
-
-        Queue<Integer> temp = q1;
-        q1 = q2;
-        q2 = temp;
-
-        return popped;
+        return q1.remove();
     }
     
     public static void main(String[] args) {
-        QueueStackPushFriendly stack = new QueueStackPushFriendly();
+        QueueStackPopFriendly stack = new QueueStackPopFriendly();
 
         stack.push(10);
         stack.push(20);
